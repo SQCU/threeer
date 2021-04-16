@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>hewllo threeer</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="js/three.js"></script>
+		<script>
+//first round of boilerplate boyyee, this sets up the renderer, clipping plane, frustrum maybe!
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial( { color: 0xDE0FAD } );
+const cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+
+camera.position.z = 5;
+
+var spinnyx = 0;
+var spinnyy = 0;
+const accx = .0001;
+const accy = .00001;
+
+function kinematics () {
+	spinnyx = spinnyx+accx; 
+	spinnyy = spinnyy+accy;
+}
+
+function animate() {
+	requestAnimationFrame( animate );
+	kinematics();
+	cube.rotation.x += spinnyx;
+	cube.rotation.y += spinnyy;
+	renderer.render( scene, camera );
+}
+animate();
+		</script>
+	</body>
+</html>
